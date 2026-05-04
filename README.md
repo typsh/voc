@@ -1,16 +1,16 @@
-#include <htc.h>
-#include <stdio.h>
-#include "lcd.h"
+    #include <htc.h>
+    #include <stdio.h>
+    #include "lcd.h"
 
-// Guna 20MHz ikut standard SK40C, pastikan sama dengan crystal fizikal
-#define _XTAL_FREQ 20000000
-__CONFIG(0x2CF2);
+    // Guna 20MHz ikut standard SK40C, pastikan sama dengan crystal fizikal
+    #define _XTAL_FREQ 20000000
+    __CONFIG(0x2CF2);
 
-unsigned int m = 1;      // Nilai mula
-unsigned int last_m = 0; // Untuk kesan perubahan
+    unsigned int m = 1;      // Nilai mula
+    unsigned int last_m = 0; // Untuk kesan perubahan
 
-void main (void)
-{
+    void main (void)
+    {
     // 1. Setting I/O
     ANSEL = 0x00;
     ANSELH = 0x00;
@@ -66,11 +66,11 @@ void main (void)
             last_m = m; // Update status terakhir
         }
     }
-}
+    }
 
-// Fungsi Interrupt
-void interrupt intMain()
-{
+    // Fungsi Interrupt
+    void interrupt intMain()
+    {
     if(INTF) // Jika interrupt RB0 berlaku
     {
         __delay_ms(20); // Debounce ringkas
@@ -82,4 +82,4 @@ void interrupt intMain()
 
         INTF = 0; // Reset flag
     }
-}
+    }
